@@ -23,10 +23,14 @@ public class Passivation {
             "      UN    {%DB6}.ACK_REQ;\n" +
             "      =     \"M_ACKR{%INDEX}\";\n";
 
+    private final int ARG;
     private final int amount;
+    private final String[] ERRORS;
 
-    public Passivation(int amount) {
+    public Passivation(int ARG,int amount,String... ERRORS) {
+        this.ARG = ARG;
         this.amount = amount;
+        this.ERRORS = ERRORS;
     }
 
     public String getCode() {
