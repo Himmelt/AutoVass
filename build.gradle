@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'org.soraworld'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.soraworld:hocon:1.2.1'
+}
