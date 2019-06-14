@@ -2,6 +2,8 @@ package org.soraworld.autovass.code.snippet;
 
 public class Passivation {
 
+    private static final String TITLE =  "NETWORK\nTITLE = F-Peripherie i.O. keine Passivierung{%0}\n";
+
     private static final String CODE = "NETWORK\n" +
             "TITLE = F-Peripherie i.O. keine Passivierung{%0}\n" +
             "      U     \"VKE=1\";\n" +
@@ -13,7 +15,7 @@ public class Passivation {
             "      UN    {%DB4}.QBAD;\n" +
             "      UN    {%DB5}.QBAD;\n" +
             "      UN    {%DB6}.QBAD;\n" +
-            "      =     \"M_AC{%INDEX}\";\n" +
+            "      =     \"M_AC{%ARG}\";\n" +
             "      U     L     24.0;\n" +
             "      UN    {%DB1}.ACK_REQ;\n" +
             "      UN    {%DB2}.ACK_REQ;\n" +
@@ -21,7 +23,7 @@ public class Passivation {
             "      UN    {%DB4}.ACK_REQ;\n" +
             "      UN    {%DB5}.ACK_REQ;\n" +
             "      UN    {%DB6}.ACK_REQ;\n" +
-            "      =     \"M_ACKR{%INDEX}\";\n";
+            "      =     \"M_ACKR{%ARG}\";\n";
 
     private final int ARG;
     private final int amount;
@@ -34,6 +36,7 @@ public class Passivation {
     }
 
     public String getCode() {
+        
         return "";
     }
 }
