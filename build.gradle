@@ -11,6 +11,21 @@ repositories {
     jcenter()
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+configurations {
+    shadow
+    compile.extendsFrom(shadow)
+}
+
 dependencies {
-    compile 'org.soraworld:hocon:1.2.1'
+    shadow 'org.soraworld:hocon:1.2.1'
+}
+
+jar {
+    configurations.shadow.copyRecursive().setTransitive(false).each {
+        artifact -> from(zipTree(artifact))
+    }
 }
