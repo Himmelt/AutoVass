@@ -1,0 +1,8 @@
+.WorkGroup {
+    margin: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: rgba(0, 0, 0, 0.57);
+    padding: 10px;
+    border-radius: 3px;
+}
