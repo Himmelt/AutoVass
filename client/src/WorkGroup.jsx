@@ -1,6 +1,7 @@
 import React from 'react';
-import {Form, Input} from 'antd';
+import {Button, Form, Icon, Input} from 'antd';
 import './WorkGroup.css';
+import SafetyCircle from "./SafetyCircle";
 
 class FormItem extends React.Component {
 
@@ -34,17 +35,57 @@ class FormItem extends React.Component {
     }
 }
 
+let id = 0;
+
 class WorkGroup extends React.Component {
 
+    addSK = () => {
+        const {form} = this.props;
+        // can use data-binding to get
+        const keys = form.getFieldValue('keys');
+        const nextKeys = keys.concat(id++);
+        // can use data-binding to set
+        // important! notify form to detect changes
+        form.setFieldsValue({
+            keys: nextKeys,
+        });
+    };
+
     render() {
+        const {getFieldDecorator, getFieldValue} = this.props.form;
+        const formItemLayout = {
+            labelCol: {
+                xs: {span: 24},
+                sm: {span: 4},
+            },
+            wrapperCol: {
+                xs: {span: 24},
+                sm: {span: 20},
+            },
+        };
+        const formItemLayoutWithOutLabel = {
+            wrapperCol: {
+                xs: {span: 24, offset: 0},
+                sm: {span: 20, offset: 4},
+            },
+        };
+        getFieldDecorator('keys', {initialValue: []});
+        const keys = getFieldValue('keys');
+        const formItems = keys.map((key, index) => (
+            <SafetyCircle text={key + ',' + index}/>
+        ));
         return (
-            <div className='WorkGroup'>
+            <div className='work-group'>
                 <Form>
-                    <FormItem label='工作组' id='arg' placeholder='请输入工作组名称'/>
+                    <FormItem label='工作组' id='work-group' placeholder='请输入工作组名称'/>
+                    {formItems}
+                    <Button type="dashed" onClick={this.addSK} style={{width: '100%'}}>
+                        <Icon type="plus"/>添加安全回路(SK)
+                    </Button>
                 </Form>
             </div>
         );
     }
 }
 
-export default WorkGroup;
+export default Form.create()(WorkGroup);
