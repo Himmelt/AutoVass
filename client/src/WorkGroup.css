@@ -6,3 +6,12 @@
     padding: 10px;
     border-radius: 3px;
 }
+
+.plus-circle {
+    font-size: large;
+}
+
+.add-work-group:focus {
+    background-color: green;
+    border-color: green;
+}

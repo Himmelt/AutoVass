@@ -6,4 +6,16 @@
     border-color: rgb(191, 191, 191);
     padding: 5px;
     border-radius: 3px;
+    position: relative;
+}
+
+.minus-circle {
+    position: absolute;
+    top: -0.5em;
+    right: -0.5em;
+    font-size: large;
+}
+
+.plus-circle {
+    font-size: large;
 }
