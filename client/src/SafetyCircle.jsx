@@ -3,14 +3,17 @@ import {Button, Form, Icon, Tooltip} from 'antd';
 import './SafetyCircle.css';
 import WorkStation from "./WorkStation";
 
-let id = 1;
-
 class SafetyCircle extends React.Component {
 
-    addST = () => {
+    constructor(props) {
+        super(props);
+        this.id = 1;
+    }
+
+    add = () => {
         const {form} = this.props;
         const keys = form.getFieldValue('keys');
-        const nextKeys = keys.concat(id++);
+        const nextKeys = keys.concat(this.id++);
         form.setFieldsValue({
             keys: nextKeys,
         });
@@ -35,13 +38,13 @@ class SafetyCircle extends React.Component {
                           twoToneColor="#ff0000"
                           onClick={this.props.onRemove}/>
                 </Tooltip>
-                <span>安全回路{this.props.id}</span>
+                <span>安全回路:{this.props.arg}{this.props.id}</span>
                 {formItems}
                 <Tooltip
                     placement="top"
                     mouseEnterDelay={0.4}
                     title="添加工作站">
-                    <Button type="dashed" onClick={this.addST} style={{width: '100%'}}>
+                    <Button type="dashed" onClick={this.add} style={{width: '100%'}}>
                         <Icon className="plus-circle" type="plus-circle" theme="twoTone" twoToneColor="#0787f6"/>
                     </Button>
                 </Tooltip>

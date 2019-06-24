@@ -3,55 +3,85 @@ import {Button, Form, Icon, Input, Tooltip} from 'antd';
 import SafetyCircle from "./SafetyCircle";
 import './WorkGroup.css';
 
-class FormItem extends React.Component {
+class WorkGroup extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {validateStatus: "", help: ""}
+        this.state = {
+            arg: 'x',
+            count: 0,
+            valid: false
+        };
+        this.id = 1;
     }
 
-    handleChange = (event) => {
-        const value = event.target.value;
-        if (value && value.length === 7) {
-            this.setState({validateStatus: "success", help: ""});
-        } else if (value && value.length === 0) {
-            this.setState({validateStatus: "", help: ""});
-        } else {
-            this.setState({validateStatus: "error", help: "请输入有效名称"});
-        }
-    };
-
-    render() {
-        return (
-            <Form.Item
-                label={this.props.label}
-                hasFeedback
-                validateStatus={this.state.validateStatus}
-                help={this.state.help}
-            >
-                <Input placeholder={this.props.placeholder} id={this.props.id} onChange={this.handleChange}/>
-            </Form.Item>
-        );
-    }
-}
-
-let id = 1;
-
-class WorkGroup extends React.Component {
     remove = k => {
         const {form} = this.props;
         const keys = form.getFieldValue('keys');
         if (keys.length === 0) return;
+        const nextKeys = keys.filter(key => key !== k);
         form.setFieldsValue({
-            keys: keys.filter(key => key !== k),
+            keys: nextKeys
+        });
+        console.log(nextKeys.length);
+        this.setState({
+            count: nextKeys.length
         });
     };
-    addSK = () => {
-        const {form} = this.props;
-        const keys = form.getFieldValue('keys');
-        const nextKeys = keys.concat(id++);
-        form.setFieldsValue({
-            keys: nextKeys,
+
+    add = () => {
+
+        this.props.form.validateFields((err, values) => {
+            console.log('values of form: ', values);
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+
+        /*        const {form} = this.props;
+                const keys = form.getFieldValue('keys');
+                const nextKeys = keys.concat(this.id++);
+                form.setFieldsValue({
+                    keys: nextKeys,
+                });
+                console.log(nextKeys.length);
+                this.setState({
+                    count: nextKeys.length
+                });*/
+    };
+
+    handleChange = (event) => {
+        const value = event.target.value;
+        if (value.length === 7) {
+            this.setState({
+                arg: value.charAt(6),
+                valid: true
+            });
+        } else {
+            this.setState({
+                arg: 'x',
+                valid: false
+            });
+        }
+    };
+
+    validARG = (rule, value, callback) => {
+        if (!value) {
+            callback('')
+        } else if (value.length <= 6) {
+            callback('工作组名长度为 7 ，例：K1U1A21')
+        } else if (!/[A-Z1-9]{6}[1-9]/.test(value)) {
+            callback('请规范填写工作组名，例：K1U1A21');
+        }
+        callback();
+    };
+
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
         });
     };
 
@@ -60,22 +90,38 @@ class WorkGroup extends React.Component {
         getFieldDecorator('keys', {initialValue: []});
         const keys = getFieldValue('keys');
         const formItems = keys.map((key, index) => (
-            <div key={key}>
-                <SafetyCircle id={key} onRemove={() => this.remove(key)}/>
-            </div>
+            <Form.Item key={key}>
+                <SafetyCircle arg={this.state.arg} id={key} onRemove={() => this.remove(key)}/>
+            </Form.Item>
         ));
         return (
             <div className='work-group'>
                 <Form>
-                    <FormItem label='工作组' id='work-group' placeholder='请输入工作组名称'/>
+                    <Form.Item label='工作组' style={{display: 'flex'}}>
+                        {getFieldDecorator('work-group', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: '必须填写工作组名称！',
+                                },
+                                {
+                                    validator: this.validARG
+                                }
+                            ],
+                        })(<Input disabled={this.state.count !== 0}
+                                  autoComplete="off" placeholder='请输入工作组名称'
+                                  onChange={this.handleChange}/>)}
+                    </Form.Item>
                     {formItems}
                     <Tooltip
                         placement="top"
                         mouseEnterDelay={0.4}
                         title="添加安全回路">
-                        <Button className="add-work-group" type="dashed" onClick={this.addSK}
+                        <Button className="add-work-group" type="dashed"
+                                onClick={this.add}
                                 style={{width: '100%'}}>
-                            <Icon className="plus-circle" type="plus-circle" theme="twoTone" twoToneColor="#02cc6b"/>
+                            <Icon className="plus-circle" type="plus-circle" theme="twoTone"
+                                  twoToneColor="#02cc6b"/>
                         </Button>
                     </Tooltip>
                 </Form>

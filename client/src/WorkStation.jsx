@@ -2,14 +2,17 @@ import React from 'react';
 import {Button, Form, Icon, Tooltip} from "antd";
 import './WorkStation.css'
 
-let id = 1;
-
 class WorkStation extends React.Component {
 
-    addST = () => {
+    constructor(props) {
+        super(props);
+        this.id = 1;
+    }
+
+    add = () => {
         const {form} = this.props;
         const keys = form.getFieldValue('keys');
-        const nextKeys = keys.concat(id++);
+        const nextKeys = keys.concat(this.id++);
         form.setFieldsValue({
             keys: nextKeys,
         });
@@ -21,7 +24,7 @@ class WorkStation extends React.Component {
         const keys = getFieldValue('keys');
         const formItems = keys.map((key, index) => (
             <div key={key}>
-                XXXXXX
+                {key}
             </div>
         ));
         return (
@@ -41,9 +44,9 @@ class WorkStation extends React.Component {
                 <Tooltip
                     placement="top"
                     mouseEnterDelay={0.4}
-                    title="添加工作站">
-                    <Button type="dashed" onClick={this.addST} style={{width: '100%'}}>
-                        <Icon className="plus-circle" type="plus-circle" theme="twoTone" twoToneColor="#0787f6"/>
+                    title="添加XXX">
+                    <Button type="dashed" onClick={this.add} style={{width: '100%'}}>
+                        <Icon className="plus-circle" type="plus-circle" theme="twoTone" twoToneColor="#FFEA00"/>
                     </Button>
                 </Tooltip>
             </div>
