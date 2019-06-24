@@ -24,7 +24,6 @@ class WorkGroup extends React.Component {
         form.setFieldsValue({
             keys: nextKeys
         });
-        console.log(nextKeys.length);
         this.setState({
             count: nextKeys.length
         });
@@ -38,7 +37,6 @@ class WorkGroup extends React.Component {
             form.setFieldsValue({
                 keys: nextKeys,
             });
-            console.log(nextKeys.length);
             this.setState({
                 count: nextKeys.length
             });
