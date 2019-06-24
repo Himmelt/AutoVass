@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, Icon, Input, Tooltip} from 'antd';
-import './WorkGroup.css';
 import SafetyCircle from "./SafetyCircle";
+import './WorkGroup.css';
 
 class FormItem extends React.Component {
 
@@ -73,7 +73,8 @@ class WorkGroup extends React.Component {
                         placement="top"
                         mouseEnterDelay={0.4}
                         title="添加安全回路">
-                        <Button className="add-work-group" type="dashed" onClick={this.addSK} style={{width: '100%'}}>
+                        <Button className="add-work-group" type="dashed" onClick={this.addSK}
+                                style={{width: '100%'}}>
                             <Icon className="plus-circle" type="plus-circle" theme="twoTone" twoToneColor="#02cc6b"/>
                         </Button>
                     </Tooltip>

@@ -21,7 +21,7 @@ class SafetyCircle extends React.Component {
         getFieldDecorator('keys', {initialValue: []});
         const keys = getFieldValue('keys');
         const formItems = keys.map((key, index) => (
-            <WorkStation id={key}/>
+            <WorkStation key={key} id={key}/>
         ));
         return (
             <div className='safety-circle'>

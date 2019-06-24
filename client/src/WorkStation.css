@@ -1,4 +1,4 @@
-.work-group {
+.work-station {
     margin: 10px;
     border-style: solid;
     border-width: thin;
@@ -11,6 +11,6 @@
     font-size: large;
 }
 
-.add-work-group:hover, .add-work-group:focus {
+.add-work-station:hover, .add-work-station:focus {
     border-color: #02cc6b !important;
 }
