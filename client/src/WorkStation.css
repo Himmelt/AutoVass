@@ -1,10 +1,12 @@
 .work-station {
-    margin: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-style: solid;
-    border-width: thin;
-    border-color: rgb(191, 191, 191);
+    border-width: 0.1em;
+    border-color: rgb(255, 236, 0);
     padding: 10px;
     border-radius: 3px;
+    position: inherit;
 }
 
 .plus-circle {

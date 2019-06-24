@@ -1,10 +1,10 @@
 .safety-circle {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     border-style: solid;
-    border-width: thin;
-    border-color: rgb(191, 191, 191);
-    padding: 5px;
+    border-width: 0.1em;
+    border-color: rgb(7, 135, 246);
+    padding: 15px 30px;
     border-radius: 3px;
     position: relative;
 }

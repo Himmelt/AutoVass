@@ -1,9 +1,9 @@
 .work-group {
-    margin: 10px;
+    margin: 30px;
     border-style: solid;
-    border-width: thin;
-    border-color: rgb(191, 191, 191);
-    padding: 10px;
+    border-width: 0.1em;
+    border-color: rgb(2, 204, 107);
+    padding: 15px 30px;
     border-radius: 3px;
 }
 
