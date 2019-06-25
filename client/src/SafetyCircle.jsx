@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, Icon, Tooltip} from 'antd';
+import {Button, Form, Icon, Input, Tooltip} from 'antd';
 import './SafetyCircle.css';
 import WorkStation from "./WorkStation";
 
@@ -38,7 +38,9 @@ class SafetyCircle extends React.Component {
                           twoToneColor="#ff0000"
                           onClick={this.props.onRemove}/>
                 </Tooltip>
-                <span>安全回路:{this.props.arg}{this.props.id}</span>
+                <Form.Item label='安全回路' style={{display: 'flex'}}>
+                    <Input style={{width: '64px'}} addonBefore={this.props.arg} defaultValue={this.props.id}/>
+                </Form.Item>
                 {formItems}
                 <Tooltip
                     placement="top"
